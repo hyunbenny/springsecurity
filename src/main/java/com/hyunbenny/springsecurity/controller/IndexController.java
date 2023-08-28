@@ -1,7 +1,6 @@
 package com.hyunbenny.springsecurity.controller;
 
 import com.hyunbenny.springsecurity.controller.dto.request.JoinRequest;
-import com.hyunbenny.springsecurity.controller.dto.request.LoginRequest;
 import com.hyunbenny.springsecurity.service.UserAccountService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -39,12 +38,6 @@ public class IndexController {
     @GetMapping("/login")
     public String loginForm() {
         return "loginForm";
-    }
-
-    @PostMapping("/login")
-    public String login(LoginRequest request) {
-        log.info("{}", request);
-        return "redirect:/";
     }
 
     @GetMapping("/join")
