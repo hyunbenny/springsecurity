@@ -23,7 +23,8 @@ public class UserAccount {
     private String password;
     private String email;
     private String role; // ROLE_USER, ROLE_ADMIN
-
+    private String provider;
+    private String providerId;
     @CreationTimestamp
     private Timestamp createdAt;
 
@@ -35,6 +36,8 @@ public class UserAccount {
                 ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", role='" + role + '\'' +
+                ", provider='" + provider + '\'' +
+                ", providerId='" + providerId + '\'' +
                 ", createdAt=" + createdAt +
                 '}';
     }
