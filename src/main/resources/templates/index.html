@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko" xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
     <title>Index 페이지</title>
@@ -7,6 +7,12 @@
 <body>
 
 <h1>Index PAGE 입니다.</h1>
+<ul class="nav justify-content-end">
+    <li class="nav-item" ><a class="nav-link text-light" href="/">HOME</a></li>
+    <li sec:authorize="isAnonymous()"><a class="nav-link text-light" th:href="@{/login}">로그인</a></li>
+    <li sec:authorize="isAuthenticated()"><a class="nav-link text-light" th:href="@{/logout}">로그아웃</a></li>
+    <li sec:authorize="isAnonymous()"><a class="nav-link text-light" th:href="@{/join}">회원가입</a></li>
+</ul>
 
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>로그인 페이지</title>
@@ -8,6 +8,9 @@
 <h1>로그인 페이지</h1>
 <hr/>
 <!-- 시큐리티는 x-www-form-url-encoded 타입만 인식 -->
+<div th:if="${param.error}" class="form-group">
+    <span th:text="${exception}" class="alert alert-danger">잘못된 아이디나 암호입니다</span>
+</div>
 <form action="/login" method="post">
     아이디: <input type="text" name="username" /><br/>
     비밀번호: <input type="password" name="password" /><br/>

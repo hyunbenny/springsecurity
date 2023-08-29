@@ -1,7 +1,10 @@
 package com.hyunbenny.springsecurity.config;
 
+import com.hyunbenny.springsecurity.auth.CustomLoginFailureHandler;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -9,8 +12,12 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
-@EnableWebSecurity // (debug = true) // SpringSecurityFilter(SecurityConfig) 가 Spring Filter Chain에 등록됨
+//@EnableWebSecurity // (debug = true) // SpringSecurityFilter(SecurityConfig) 가 Spring Filter Chain에 등록됨
+@EnableGlobalMethodSecurity(securedEnabled = true, prePostEnabled = true)
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final CustomLoginFailureHandler customLoginFailureHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -32,6 +39,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .loginPage("/login")
                 .loginProcessingUrl("/login") // `/login`주소가 호출되면 spring security가 낚아채서 대신 로그인을 진행해준다. -> 로그인 처리 로직이 필요없음
                 .defaultSuccessUrl("/")
+                .failureHandler(customLoginFailureHandler)
         ;
     }
 }
