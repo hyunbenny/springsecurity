@@ -9,6 +9,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.net.URLEncoder;
+import java.nio.charset.Charset;
 
 @Slf4j
 @Component
@@ -18,7 +20,7 @@ public class CustomLoginFailureHandler extends SimpleUrlAuthenticationFailureHan
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
         log.info("===== CustomAuthenticationFailureHandler onAuthenticationFailure() called =====");
         String errorMessage = "아이디 혹은 비빌번호가 올바르지 않습니다.";
-        setDefaultFailureUrl("/login?error=true&ex=" + errorMessage);
+        setDefaultFailureUrl("/login?error=true&ex=" + URLEncoder.encode(errorMessage, Charset.forName("UTF-8")));
         super.onAuthenticationFailure(request, response, exception);
     }
 }
